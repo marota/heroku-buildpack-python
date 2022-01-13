@@ -280,8 +280,8 @@ mtime "sqlite3.install.time" "${start}"
 # Install dependencies with pip (where the magic happens).
 (( start=$(nowms) ))
 # shellcheck source=bin/steps/pip-install
-source "$BIN_DIR/steps/pip-install --no-cache-dir --compile "
-mtime "pip.install.time" "${start}"
+source "$BIN_DIR/steps/pip-install"
+mtime "pip.install.time --no-cache-dir --compile" "${start}"
 
 #remove all jupyter dependencies that could have been added by plotly and which are useless
 find . -name "*jupyter*" -exec rm -rf {} +
