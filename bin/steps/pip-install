@@ -45,6 +45,7 @@ if [ ! "$SKIP_PIP_INSTALL" ]; then
     fi
     
     CFLAGS="-g0 -Wl,--strip-all -I/usr/include:/usr/local/include -L/usr/lib:/usr/local/lib" /app/.heroku/python/bin/pip install -r "$BUILD_DIR/requirements.txt" --exists-action=w --src=/app/.heroku/src --disable-pip-version-check --no-cache-dir --compile --global-option=build_ext .  2>&1 | tee "$WARNINGS_LOG" | cleanup | indent
+    find "$BUILD_DIR/.heroku/python" -name numpy -exec du -d1 {} +
     PIP_STATUS="${PIPESTATUS[0]}"
     set -e
 
