@@ -7,6 +7,9 @@ if [ ! "$SKIP_PIP_INSTALL" ]; then
 
     # Install dependencies with Pip.
     puts-step "Installing requirements with pip"
+    
+    #adding g++ compiler for more compressed python dependencies
+    apt-get install g++
 
     # Set Pip env vars
     # This reads certain environment variables set on the Heroku app config
