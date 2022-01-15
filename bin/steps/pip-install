@@ -50,8 +50,9 @@ if [ ! "$SKIP_PIP_INSTALL" ]; then
 
     /app/.heroku/python/bin/pip uninstall -y numpy scipy pandas matplotlib 2>&1 | tee "$WARNINGS_LOG" | cleanup | indent
     
-    apt-get install libblas-dev checkinstall
-    apt-get install liblapacke-dev checkinstall
+    apt-get install libblas-dev 
+    apt-get install liblapacke-dev 
+    apt-get install gfortran
     type libblas-dev
     
     CFLAGS="-g0 -Wl,--strip-all -I/usr/include:/usr/local/include -L/usr/lib:/usr/local/lib" /app/.heroku/python/bin/pip install --exists-action=w --src=/app/.heroku/src --disable-pip-version-check --no-cache-dir --compile --global-option=build_ext scipy numpy pandas matplotlib 2>&1 | tee "$WARNINGS_LOG" | cleanup | indent
