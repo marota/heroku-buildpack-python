@@ -49,7 +49,7 @@ if [ ! "$SKIP_PIP_INSTALL" ]; then
     /app/.heroku/python/bin/pip install -r "$BUILD_DIR/requirements.txt" --exists-action=w --src=/app/.heroku/src --disable-pip-version-check --no-cache-dir --compile  2>&1 | tee "$WARNINGS_LOG" | cleanup | indent
 
     /app/.heroku/python/bin/pip uninstall -y numpy notebook debugpy jedi IPython 2>&1 | tee "$WARNINGS_LOG" | cleanup | indent
-    /app/.heroku/python/bin/pip uninstall -y cryptography pygments nbformat nbclient plotlywidget  2>&1 | tee "$WARNINGS_LOG" | cleanup | indent #kiwisolver setuptools 
+    /app/.heroku/python/bin/pip uninstall -y cryptography pygments nbformat nbclient plotlywidget kiwisolver  2>&1 | tee "$WARNINGS_LOG" | cleanup | indent #kiwisolver setuptools 
     
     #apt-get install libblas-dev 
     #apt-get install liblapacke-dev 
@@ -79,7 +79,8 @@ if [ ! "$SKIP_PIP_INSTALL" ]; then
         fi
     fi
     
-    #Uninstall pip and setuptools are they are not needed anymore
+    #Uninstall pip and config python are they are not needed anymore
     pip uninstall -y pip #don't remove setuptools actually
+    rm -rf /app/.heroku/python/lib/python3.9/config-3.9-x86_64-linux-gnu
     
 fi
