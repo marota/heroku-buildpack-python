@@ -80,6 +80,6 @@ if [ ! "$SKIP_PIP_INSTALL" ]; then
     fi
     
     #Uninstall pip and setuptools are they are not needed anymore
-    pip uninstall -y setuptools pip
+    pip uninstall -y pip #don't remove setuptools actually
     
 fi
