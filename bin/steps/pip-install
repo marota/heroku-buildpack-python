@@ -83,5 +83,6 @@ if [ ! "$SKIP_PIP_INSTALL" ]; then
     #Uninstall pip and config python are they are not needed anymore
     pip uninstall -y pip #don't remove setuptools actually
     rm -rf /app/.heroku/python/lib/python3.9/config-3.9-x86_64-linux-gnu
+    rm -rf  /app/.heroku/python/lib/libpython3.9.a
     
 fi
