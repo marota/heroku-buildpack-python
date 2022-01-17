@@ -50,7 +50,7 @@ if [ ! "$SKIP_PIP_INSTALL" ]; then
     /app/.heroku/python/bin/pip install -r "$BUILD_DIR/requirements.txt" --exists-action=w --src=/app/.heroku/src --disable-pip-version-check --no-cache-dir --compile  2>&1 | tee "$WARNINGS_LOG" | cleanup | indent
 
     /app/.heroku/python/bin/pip uninstall -y scipy notebook debugpy jedi IPython 2>&1 | tee "$WARNINGS_LOG" | cleanup | indent #numpy
-    /app/.heroku/python/bin/pip uninstall -y cryptography pygments nbformat nbclient plotlywidget 2>&1 | tee "$WARNINGS_LOG" | cleanup | indent 
+    /app/.heroku/python/bin/pip uninstall -y cryptography pygments nbconvert nbformat nbclient plotlywidget ipykernel prompt_toolkit openpyxl 2>&1 | tee "$WARNINGS_LOG" | cleanup | indent 
     
     #apt-get install libblas-dev 
     #apt-get install liblapacke-dev 
@@ -58,7 +58,7 @@ if [ ! "$SKIP_PIP_INSTALL" ]; then
     #type libblas-dev
     
     #CFLAGS="-g0 -I/usr/include:/usr/local/include -L/usr/lib:/usr/local/lib" /app/.heroku/python/bin/pip install --exists-action=w --src=/app/.heroku/src --disable-pip-version-check --no-cache-dir --compile --global-option=build_ext numpy 2>&1 | tee "$WARNINGS_LOG" | cleanup | indent
-    CFLAGS="-g0 -I$C_INCLUDE_PATH -L$LIBRARY_PATH" /app/.heroku/python/bin/pip install --exists-action=w --src=/app/.heroku/src --disable-pip-version-check --no-cache-dir --compile --global-option=build_ext scipy 2>&1 | tee "$WARNINGS_LOG" | cleanup | indent #numpy
+    CFLAGS="-g0 -I$C_INCLUDE_PATH/usr/include:/usr/local/include -L$LIBRARY_PATH/usr/lib:/usr/local/lib" /app/.heroku/python/bin/pip install --exists-action=w --src=/app/.heroku/src --disable-pip-version-check --no-cache-dir --compile --global-option=build_ext scipy 2>&1 | tee "$WARNINGS_LOG" | cleanup | indent #numpy
     find "$BUILD_DIR/.heroku/python" -name numpy -exec du -d1 {} +
     PIP_STATUS="${PIPESTATUS[0]}"
     set -e
@@ -86,5 +86,7 @@ if [ ! "$SKIP_PIP_INSTALL" ]; then
     pip uninstall -y pip #don't remove setuptools actually
     rm -rf /app/.heroku/python/lib/python3.9/config-3.9-x86_64-linux-gnu
     rm -rf  /app/.heroku/python/lib/libpython3.9.a
+    #rm -rf /app/.heroku/python/lib/python3.9/site-packages/setuptools ? #if package pkg_ressources is kept ?
+    #delet /app/.heroku/python/lib/python3.9/__pycache__/ ?
     
 fi
