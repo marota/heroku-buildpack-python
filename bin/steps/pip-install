@@ -80,8 +80,8 @@ if [ ! "$SKIP_PIP_INSTALL" ]; then
     
     #keep rte_case14_realistic
     mv "$BUILD_DIR/.heroku/python/lib/python3.9/site-packages/grid2op/data/rte_case14_realistic" "$BUILD_DIR/.heroku/python/lib/python3.9/site-packages/grid2op"
-    rm -rf "$BUILD_DIR/.heroku/python/lib/python3.9/site-packages/grid2op/data" 
-    mv "$BUILD_DIR/.heroku/python/lib/python3.9/site-packages/grid2op/rte_case14_realistic" "$BUILD_DIR/.heroku/python/lib/python3.9/site-packages/grid2op/data/rte_case14_realistic"
+    rm -rf "$BUILD_DIR/.heroku/python/lib/python3.9/site-packages/grid2op/data/*" 
+    mv "$BUILD_DIR/.heroku/python/lib/python3.9/site-packages/grid2op/rte_case14_realistic" "$BUILD_DIR/.heroku/python/lib/python3.9/site-packages/grid2op/data/"
     
     rm -rf "$BUILD_DIR/./.heroku/python/lib/python3.9/site-packages/grid2op/tests"
     rm -rf "$BUILD_DIR/.heroku/python/lib/python3.9/site-packages/pandas/tests"
