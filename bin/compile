@@ -149,6 +149,7 @@ echo "$LD_LIBRARY_PATH"
 echo "$INCLUDE_PATH"
 
 du -ha --max-depth 1 /app | sort -hr
+find . -name blas -exec du -d1 {} +
 
 # Global pip options (https://pip.pypa.io/en/stable/user_guide/#environment-variables).
 # Disable pip's warnings about EOL Python since we show our own.
