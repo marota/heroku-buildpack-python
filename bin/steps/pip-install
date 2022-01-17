@@ -51,7 +51,7 @@ if [ ! "$SKIP_PIP_INSTALL" ]; then
     #/app/.heroku/python/bin/pip pip uninstall numpy
     #cp -r "$BUILD_DIR/.apt/usr/lib/python3/dist-packages" .heroku/python/lib/python3.9/site-packages/
     
-    /app/.heroku/python/bin/pip uninstall -y scipy
+    /app/.heroku/python/bin/pip uninstall -y grid2viz
     /app/.heroku/python/bin/pip install -r "$BUILD_DIR/requirements.txt" --exists-action=w --src=/app/.heroku/src --disable-pip-version-check --no-cache-dir --compile  2>&1 | tee "$WARNINGS_LOG" | cleanup | indent
 
     /app/.heroku/python/bin/pip uninstall -y notebook debugpy jedi IPython 2>&1 | tee "$WARNINGS_LOG" | cleanup | indent #numpy
@@ -76,6 +76,9 @@ if [ ! "$SKIP_PIP_INSTALL" ]; then
     rm -rf "$BUILD_DIR/.heroku/python/lib/python3.9/site-packages/scipy/fftpack" #"$BUILD_DIR/.heroku/python/lib/python3.9/site-packages/scipy/interpolate" #"$BUILD_DIR/.heroku/python/lib/python3.9/site-packages/scipy/stats"
     #rm -rf "$BUILD_DIR/.heroku/python/lib/python3.9/site-packages/scipy/misc" #"$BUILD_DIR/.heroku/python/lib/python3.9/site-packages/scipy/integrate" #"$BUILD_DIR/.heroku/python/lib/python3.9/site-packages/scipy/ndimage"
     rm -rf "$BUILD_DIR/.heroku/python/lib/python3.9/site-packages/grid2viz/data" "$BUILD_DIR/.heroku/python/lib/python3.9/site-packages/grid2viz/assets/gif" #"$BUILD_DIR/.heroku/python/lib/python3.9/site-packages/grid2viz/assets/screenshots"
+    rm -rf "$BUILD_DIR/.heroku/python/lib/python3.9/site-packages/pandapower/networks" "$BUILD_DIR/.heroku/python/lib/python3.9/site-packages/pandapower/tests"
+    rm -rf "$BUILD_DIR/.heroku/python/lib/python3.9/site-packages/grid2op/data" "$BUILD_DIR/./.heroku/python/lib/python3.9/site-packages/grid2op/tests"
+    rm -rf "$BUILD_DIR/.heroku/python/lib/python3.9/site-packages/pandas/tests"
     PIP_STATUS="${PIPESTATUS[0]}"
     set -e
 
@@ -99,7 +102,7 @@ if [ ! "$SKIP_PIP_INSTALL" ]; then
     fi
     
     #Uninstall pip and config python are they are not needed anymore
-    #pip uninstall -y pip #don't remove setuptools actually
+    pip uninstall -y pip #don't remove setuptools actually
     rm -rf /app/.heroku/python/lib/python3.9/config-3.9-x86_64-linux-gnu
     rm -rf  /app/.heroku/python/lib/libpython3.9.a
     #rm -rf /app/.heroku/python/lib/python3.9/site-packages/setuptools ? #if package pkg_ressources is kept ?
