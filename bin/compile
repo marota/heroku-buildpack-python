@@ -389,3 +389,6 @@ fi
 # Measure the size of the Python installation.
 # shellcheck disable=SC2119
 mmeasure 'python.size' "$(measure-size)"
+path1=/app/.apt/usrlib/python3/dist-packages
+path2=/app/.heroku/python/lib/python3.9/site-packages
+export PYTHONPATH=path2:path1:${PYTHONPATH}
