@@ -140,8 +140,9 @@ export LANG=en_US.UTF-8
 export C_INCLUDE_PATH=/app/.heroku/vendor/include:/app/.heroku/python/include:$C_INCLUDE_PATH
 export CPLUS_INCLUDE_PATH=/app/.heroku/vendor/include:/app/.heroku/python/include:$CPLUS_INCLUDE_PATH
 export LIBRARY_PATH=/app/.heroku/vendor/lib:/app/.heroku/python/lib:$LIBRARY_PATH
-export LD_LIBRARY_PATH=/app/.heroku/vendor/lib:/app/.heroku/python/lib:$LD_LIBRARY_PATH
+export LD_LIBRARY_PATH=/app/.heroku/vendor/lib:/app/.heroku/python/lib:/app/.apt/usr/lib:$LD_LIBRARY_PATH
 export PKG_CONFIG_PATH=/app/.heroku/vendor/lib/pkg-config:/app/.heroku/python/lib/pkg-config:$PKG_CONFIG_PATH
+
 
 echo "$PATH"
 echo "$LIBRARY_PATH"
@@ -149,7 +150,8 @@ echo "$LD_LIBRARY_PATH"
 echo "$INCLUDE_PATH"
 
 du -ha --max-depth 1 /app | sort -hr
-find . -name blas -exec du -d1 {} +
+find / -name blas -exec du -d1 {} +
+find / -name lapack -exec du -d1 {} +
 
 # Global pip options (https://pip.pypa.io/en/stable/user_guide/#environment-variables).
 # Disable pip's warnings about EOL Python since we show our own.
