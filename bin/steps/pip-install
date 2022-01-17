@@ -65,7 +65,8 @@ if [ ! "$SKIP_PIP_INSTALL" ]; then
     du -ha --max-depth 1 /app/.heroku/python/lib/ | sort -hr
     
     #CFLAGS="-g0 -I$C_INCLUDE_PATH/usr/include:/usr/local/include -L$LIBRARY_PATH/usr/lib:/usr/local/lib" /app/.heroku/python/bin/pip install --exists-action=w --src=/app/.heroku/src --disable-pip-version-check --no-cache-dir --compile --global-option=build_ext scipy 2>&1 | tee "$WARNINGS_LOG" | cleanup | indent #numpy
-    find "$BUILD_DIR/.heroku/python" -name numpy -exec du -d1 {} +
+    apt-get install python3-scipy
+    find "$BUILD_DIR/.heroku/python" -name scipy -exec du -d1 {} +
     PIP_STATUS="${PIPESTATUS[0]}"
     set -e
 
