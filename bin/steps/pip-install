@@ -49,14 +49,15 @@ if [ ! "$SKIP_PIP_INSTALL" ]; then
     /app/.heroku/python/bin/pip install -r "$BUILD_DIR/requirements.txt" --exists-action=w --src=/app/.heroku/src --disable-pip-version-check --no-cache-dir --compile  2>&1 | tee "$WARNINGS_LOG" | cleanup | indent
 
     /app/.heroku/python/bin/pip uninstall -y numpy notebook debugpy jedi IPython 2>&1 | tee "$WARNINGS_LOG" | cleanup | indent
-    /app/.heroku/python/bin/pip uninstall -y cryptography pygments nbformat nbclient plotlywidget fontTools Pillow PIL  2>&1 | tee "$WARNINGS_LOG" | cleanup | indent #fontTools Pillow.libs PIL 
+    /app/.heroku/python/bin/pip uninstall -y cryptography pygments nbformat nbclient plotlywidget 2>&1 | tee "$WARNINGS_LOG" | cleanup | indent #fontTools Pillow.libs PIL 
     
     #apt-get install libblas-dev 
     #apt-get install liblapacke-dev 
     #apt-get install gfortran
     #type libblas-dev
     
-    CFLAGS="-g0 -I/usr/include:/usr/local/include -L/usr/lib:/usr/local/lib" /app/.heroku/python/bin/pip install --exists-action=w --src=/app/.heroku/src --disable-pip-version-check --no-cache-dir --compile --global-option=build_ext numpy 2>&1 | tee "$WARNINGS_LOG" | cleanup | indent
+    #CFLAGS="-g0 -I/usr/include:/usr/local/include -L/usr/lib:/usr/local/lib" /app/.heroku/python/bin/pip install --exists-action=w --src=/app/.heroku/src --disable-pip-version-check --no-cache-dir --compile --global-option=build_ext numpy 2>&1 | tee "$WARNINGS_LOG" | cleanup | indent
+    CFLAGS="-g0 -I$C_INCLUDE_PATH -L$LIBRARY_PATH" /app/.heroku/python/bin/pip install --exists-action=w --src=/app/.heroku/src --disable-pip-version-check --no-cache-dir --compile --global-option=build_ext numpy 2>&1 | tee "$WARNINGS_LOG" | cleanup | indent
     find "$BUILD_DIR/.heroku/python" -name numpy -exec du -d1 {} +
     PIP_STATUS="${PIPESTATUS[0]}"
     set -e
