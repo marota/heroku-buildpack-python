@@ -54,7 +54,7 @@ if [ ! "$SKIP_PIP_INSTALL" ]; then
 
     /app/.heroku/python/bin/pip install -r "$BUILD_DIR/requirements.txt" --exists-action=w --src=/app/.heroku/src --disable-pip-version-check --no-cache-dir --compile  2>&1 | tee "$WARNINGS_LOG" | cleanup | indent
 
-    /app/.heroku/python/bin/pip uninstall -y scipy notebook debugpy jedi IPython 2>&1 | tee "$WARNINGS_LOG" | cleanup | indent #numpy
+    /app/.heroku/python/bin/pip uninstall -y numpy notebook debugpy jedi IPython 2>&1 | tee "$WARNINGS_LOG" | cleanup | indent #scipy
     /app/.heroku/python/bin/pip uninstall -y cryptography pygments nbconvert nbformat nbclient plotlywidget ipykernel prompt_toolkit openpyxl 2>&1 | tee "$WARNINGS_LOG" | cleanup | indent 
     
     #apt-get install libblas-dev 
@@ -63,13 +63,13 @@ if [ ! "$SKIP_PIP_INSTALL" ]; then
     #type libblas-dev
     
     #CFLAGS="-g0 -I/usr/include:/usr/local/include -L/usr/lib:/usr/local/lib" /app/.heroku/python/bin/pip install --exists-action=w --src=/app/.heroku/src --disable-pip-version-check --no-cache-dir --compile --global-option=build_ext numpy 2>&1 | tee "$WARNINGS_LOG" | cleanup | indent
-    du -ha --max-depth 1 /app/.heroku/python/lib/ | sort -hr
-    cp -r "$BUILD_DIR/.apt/usr/lib/x86_64-linux-gnu/blas" /app/.heroku/python/lib/
-    cp -r "$BUILD_DIR/.apt/usr/lib/x86_64-linux-gnu/lapack" /app/.heroku/python/lib/
-    find "$BUILD_DIR/.heroku/python" -name blas -exec du -d1 {} +
-    du -ha --max-depth 1 /app/.heroku/python/lib/ | sort -hr
+    #du -ha --max-depth 1 /app/.heroku/python/lib/ | sort -hr
+    #cp -r "$BUILD_DIR/.apt/usr/lib/x86_64-linux-gnu/blas" /app/.heroku/python/lib/
+    #cp -r "$BUILD_DIR/.apt/usr/lib/x86_64-linux-gnu/lapack" /app/.heroku/python/lib/
+    #find "$BUILD_DIR/.heroku/python" -name blas -exec du -d1 {} +
+    #du -ha --max-depth 1 /app/.heroku/python/lib/ | sort -hr
     
-    CFLAGS="-g0 -I/usr/include:/usr/local/include -L$BUILD_DIR/.apt/usr/lib:/usr/lib:/usr/local/lib" /app/.heroku/python/bin/pip install --exists-action=w --src=/app/.heroku/src --disable-pip-version-check --no-cache-dir --compile --global-option=build_ext scipy 2>&1 | tee "$WARNINGS_LOG" | cleanup | indent #numpy
+    CFLAGS="-g0 -I/usr/include:/usr/local/include -L/usr/lib:/usr/local/lib" /app/.heroku/python/bin/pip install --exists-action=w --src=/app/.heroku/src --disable-pip-version-check --no-cache-dir --compile --global-option=build_ext numpy 2>&1 | tee "$WARNINGS_LOG" | cleanup | indent #numpy
 
     find "$BUILD_DIR/.heroku/python" -name scipy -exec du -d1 {} +
     PIP_STATUS="${PIPESTATUS[0]}"
