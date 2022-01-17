@@ -73,7 +73,7 @@ if [ ! "$SKIP_PIP_INSTALL" ]; then
 
     find "$BUILD_DIR/.heroku/python" -name scipy -exec du -d1 {} +
     rm -rf "$BUILD_DIR/.heroku/python/lib/python3.9/site-packages/scipy/signal" "$BUILD_DIR/.heroku/python/lib/python3.9/site-packages/scipy/fft" #"$BUILD_DIR/.heroku/python/lib/python3.9/site-packages/scipy/cluster" 
-    rm -rf "$BUILD_DIR/.heroku/python/lib/python3.9/site-packages/scipy/fftpack" "$BUILD_DIR/.heroku/python/lib/python3.9/site-packages/scipy/interpolate" #"$BUILD_DIR/.heroku/python/lib/python3.9/site-packages/scipy/stats"
+    rm -rf "$BUILD_DIR/.heroku/python/lib/python3.9/site-packages/scipy/fftpack" #"$BUILD_DIR/.heroku/python/lib/python3.9/site-packages/scipy/interpolate" #"$BUILD_DIR/.heroku/python/lib/python3.9/site-packages/scipy/stats"
     #rm -rf "$BUILD_DIR/.heroku/python/lib/python3.9/site-packages/scipy/misc" #"$BUILD_DIR/.heroku/python/lib/python3.9/site-packages/scipy/integrate" #"$BUILD_DIR/.heroku/python/lib/python3.9/site-packages/scipy/ndimage"
     rm -rf "$BUILD_DIR/.heroku/python/lib/python3.9/site-packages/grid2viz/data" "$BUILD_DIR/.heroku/python/lib/python3.9/site-packages/grid2viz/assets/gif" #"$BUILD_DIR/.heroku/python/lib/python3.9/site-packages/grid2viz/assets/screenshots"
     PIP_STATUS="${PIPESTATUS[0]}"
