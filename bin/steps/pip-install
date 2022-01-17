@@ -51,7 +51,7 @@ if [ ! "$SKIP_PIP_INSTALL" ]; then
     #/app/.heroku/python/bin/pip pip uninstall numpy
     #cp -r "$BUILD_DIR/.apt/usr/lib/python3/dist-packages" .heroku/python/lib/python3.9/site-packages/
     
-
+    /app/.heroku/python/bin/pip uninstall -y scipy
     /app/.heroku/python/bin/pip install -r "$BUILD_DIR/requirements.txt" --exists-action=w --src=/app/.heroku/src --disable-pip-version-check --no-cache-dir --compile  2>&1 | tee "$WARNINGS_LOG" | cleanup | indent
 
     /app/.heroku/python/bin/pip uninstall -y notebook debugpy jedi IPython 2>&1 | tee "$WARNINGS_LOG" | cleanup | indent #numpy
