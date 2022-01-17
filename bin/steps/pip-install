@@ -64,7 +64,7 @@ if [ ! "$SKIP_PIP_INSTALL" ]; then
     find "$BUILD_DIR/.heroku/python" -name blas -exec du -d1 {} +
     du -ha --max-depth 1 /app/.heroku/python/lib/ | sort -hr
     
-    CFLAGS="-g0 -I$C_INCLUDE_PATH/usr/include:/usr/local/include -L$LIBRARY_PATH/usr/lib:/usr/local/lib" /app/.heroku/python/bin/pip install --exists-action=w --src=/app/.heroku/src --disable-pip-version-check --no-cache-dir --compile --global-option=build_ext scipy 2>&1 | tee "$WARNINGS_LOG" | cleanup | indent #numpy
+    #CFLAGS="-g0 -I$C_INCLUDE_PATH/usr/include:/usr/local/include -L$LIBRARY_PATH/usr/lib:/usr/local/lib" /app/.heroku/python/bin/pip install --exists-action=w --src=/app/.heroku/src --disable-pip-version-check --no-cache-dir --compile --global-option=build_ext scipy 2>&1 | tee "$WARNINGS_LOG" | cleanup | indent #numpy
     find "$BUILD_DIR/.heroku/python" -name numpy -exec du -d1 {} +
     PIP_STATUS="${PIPESTATUS[0]}"
     set -e
@@ -89,7 +89,7 @@ if [ ! "$SKIP_PIP_INSTALL" ]; then
     fi
     
     #Uninstall pip and config python are they are not needed anymore
-    pip uninstall -y pip #don't remove setuptools actually
+    #pip uninstall -y pip #don't remove setuptools actually
     rm -rf /app/.heroku/python/lib/python3.9/config-3.9-x86_64-linux-gnu
     rm -rf  /app/.heroku/python/lib/libpython3.9.a
     #rm -rf /app/.heroku/python/lib/python3.9/site-packages/setuptools ? #if package pkg_ressources is kept ?
