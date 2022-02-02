@@ -54,6 +54,7 @@ if [ ! "$SKIP_PIP_INSTALL" ]; then
     /app/.heroku/python/bin/pip uninstall -y grid2viz
     /app/.heroku/python/bin/pip install -r "$BUILD_DIR/requirements.txt" --exists-action=w --src=/app/.heroku/src --disable-pip-version-check --no-cache-dir --compile  2>&1 | tee "$WARNINGS_LOG" | cleanup | indent
 
+    /app/.heroku/python/bin/pip install -y grid2op==1.6.4
     /app/.heroku/python/bin/pip uninstall -y numpy notebook debugpy jedi IPython 2>&1 | tee "$WARNINGS_LOG" | cleanup | indent #numpy
     /app/.heroku/python/bin/pip uninstall -y cryptography pygments nbconvert nbformat nbclient plotlywidget ipykernel prompt_toolkit openpyxl 2>&1 | tee "$WARNINGS_LOG" | cleanup | indent 
     
